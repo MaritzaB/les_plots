@@ -2,32 +2,35 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Initialize random_walk
-random_walk = [0]
-x_axis = list(range(100))
+# initialize and populate all_walks
+all_walks = []
+for i in range(10) :
+    random_walk = [0]
+    for x in range(100) :
+        step = random_walk[-1]
+        dice = np.random.randint(1,7)
+        if dice <= 2:
+            step = max(0, step - 1)
+        elif dice <= 5:
+            step = step + 1
+        else:
+            step = step + np.random.randint(1,7)
+        random_walk.append(step)
+    all_walks.append(random_walk)
 
-# Complete the ___
-for x in x_axis:
-    # Set step: last element in random_walk
-    step = random_walk[-1]
+# Convert all_walks to NumPy array: np_aw
+np_aw = np.array(all_walks)
 
-    # Roll the dice
-    dice = np.random.randint(1,7)
+# Plot np_aw and show
+plt.plot(np_aw)
+plt.savefig('./figures/prueba_01.png')
 
-    # Determine next step, and make sure step can't go below 0
-    if dice <= 2:
-        step = max(10,step - 1)
-    elif dice <= 5:
-        step = step + 1
-    else:
-        step = step + np.random.randint(1,7)
+# Clear the figure
+plt.clf()
 
-    # append next_step to random_walk
-    random_walk.append(step)
+# Transpose np_aw: np_aw_t
+np_aw_t = np.transpose(np_aw)
 
-# Print random_walk
-print(random_walk)
-
-plt.plot(random_walk)
-
-plt.savefig('./figures/prueba.png')
+# Plot np_aw_t and show
+plt.plot(np_aw_t)
+plt.savefig('./figures/prueba_02.png')
